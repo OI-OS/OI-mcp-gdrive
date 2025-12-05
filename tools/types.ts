@@ -24,6 +24,7 @@ export interface GDriveSearchInput {
   query: string;
   pageToken?: string;
   pageSize?: number;
+  driveName?: string; // Optional shared drive name to filter by
 }
 
 export interface GDriveReadFileInput {
@@ -40,5 +41,18 @@ export interface GSheetsReadInput {
   spreadsheetId: string;
   ranges?: string[]; // Optional A1 notation ranges like "Sheet1!A1:B10"
   sheetId?: number; // Optional specific sheet ID
+}
+
+export interface GDriveCreateFolderInput {
+  folderName: string;
+  parentId?: string; // Optional parent folder ID
+  driveName?: string; // Optional shared drive name
+}
+
+export interface GDriveUploadFileInput {
+  filePath: string;
+  fileName?: string; // Optional custom file name
+  parentId?: string; // Optional parent folder ID
+  driveName?: string; // Optional shared drive name
 }
 

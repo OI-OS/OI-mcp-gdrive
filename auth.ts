@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 
 export const SCOPES = [
-  "https://www.googleapis.com/auth/drive.readonly",
+  "https://www.googleapis.com/auth/drive",
   "https://www.googleapis.com/auth/spreadsheets",
 ];
 

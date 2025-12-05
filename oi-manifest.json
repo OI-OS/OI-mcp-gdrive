@@ -1,0 +1,144 @@
+{
+  "server_name": "OI-mcp-gdrive",
+  "version": "1.0.0",
+  "intents": [
+    {
+      "keyword": "gdrive search",
+      "tool_name": "gdrive_search",
+      "priority": 10
+    },
+    {
+      "keyword": "google drive search",
+      "tool_name": "gdrive_search",
+      "priority": 10
+    },
+    {
+      "keyword": "search drive",
+      "tool_name": "gdrive_search",
+      "priority": 10
+    },
+    {
+      "keyword": "search google drive",
+      "tool_name": "gdrive_search",
+      "priority": 10
+    },
+    {
+      "keyword": "find file drive",
+      "tool_name": "gdrive_search",
+      "priority": 8
+    },
+    {
+      "keyword": "find in drive",
+      "tool_name": "gdrive_search",
+      "priority": 8
+    },
+    {
+      "keyword": "gdrive read",
+      "tool_name": "gdrive_read_file",
+      "priority": 10
+    },
+    {
+      "keyword": "read drive file",
+      "tool_name": "gdrive_read_file",
+      "priority": 10
+    },
+    {
+      "keyword": "read google drive",
+      "tool_name": "gdrive_read_file",
+      "priority": 10
+    },
+    {
+      "keyword": "get drive file",
+      "tool_name": "gdrive_read_file",
+      "priority": 10
+    },
+    {
+      "keyword": "open drive file",
+      "tool_name": "gdrive_read_file",
+      "priority": 8
+    },
+    {
+      "keyword": "gsheets read",
+      "tool_name": "gsheets_read",
+      "priority": 10
+    },
+    {
+      "keyword": "read sheet",
+      "tool_name": "gsheets_read",
+      "priority": 10
+    },
+    {
+      "keyword": "read spreadsheet",
+      "tool_name": "gsheets_read",
+      "priority": 10
+    },
+    {
+      "keyword": "get sheet data",
+      "tool_name": "gsheets_read",
+      "priority": 10
+    },
+    {
+      "keyword": "get spreadsheet",
+      "tool_name": "gsheets_read",
+      "priority": 8
+    },
+    {
+      "keyword": "read google sheet",
+      "tool_name": "gsheets_read",
+      "priority": 10
+    },
+    {
+      "keyword": "gsheets update",
+      "tool_name": "gsheets_update_cell",
+      "priority": 10
+    },
+    {
+      "keyword": "update sheet",
+      "tool_name": "gsheets_update_cell",
+      "priority": 10
+    },
+    {
+      "keyword": "update cell",
+      "tool_name": "gsheets_update_cell",
+      "priority": 10
+    },
+    {
+      "keyword": "edit sheet",
+      "tool_name": "gsheets_update_cell",
+      "priority": 10
+    },
+    {
+      "keyword": "set cell",
+      "tool_name": "gsheets_update_cell",
+      "priority": 8
+    },
+    {
+      "keyword": "write to sheet",
+      "tool_name": "gsheets_update_cell",
+      "priority": 8
+    }
+  ],
+  "parameter_extractors": {
+    "gdrive_search": {
+      "OI-mcp-gdrive::gdrive_search.driveName": "regex:(?:in|from|shared[\\s_-]?drive|drive)[\\s:]+([A-Z][A-Za-z0-9\\s_-]+(?:\\s+[A-Z][A-Za-z0-9\\s_-]+)*)",
+      "OI-mcp-gdrive::gdrive_search.query": "conditional:if_matches:^(.+?)\\s+(?:in|from|shared[\\s_-]?)?drive\\s+[A-Z]|then:regex:^(.+?)\\s+(?:in|from|shared[\\s_-]?)?drive\\s+[A-Z]|remove:search,find,google,drive,gdrive,for|trim|else:conditional:if_matches:.*(?:in|from|shared[\\s_-]?)?drive\\s+[A-Z]|then:default:|else:remove:search,find,google,drive,gdrive,for,in,shared",
+      "OI-mcp-gdrive::gdrive_search.pageSize": "regex:(?:page[\\s_-]?size|limit|max|results?)[\\s:]+(\\d+)",
+      "OI-mcp-gdrive::gdrive_search.pageToken": "regex:(?:page[\\s_-]?token|token|next)[\\s:]+([A-Za-z0-9=_-]+)"
+    },
+    "gdrive_read_file": {
+      "OI-mcp-gdrive::gdrive_read_file.fileId": "conditional:if_matches:(?:read|get|open).*?file.*?([A-Za-z0-9_-]{20,})|then:regex:(?:read|get|open).*?file.*?([A-Za-z0-9_-]{20,})|else:conditional:if_matches:(?:file[\\s_-]?id|fileId|id)[\\s:]+([A-Za-z0-9_-]+)|then:regex:(?:file[\\s_-]?id|fileId|id)[\\s:]+([A-Za-z0-9_-]+)|else:regex:([A-Za-z0-9_-]{20,})"
+    },
+    "gsheets_read": {
+      "OI-mcp-gdrive::gsheets_read.spreadsheetId": "regex:(?:spreadsheet[\\s_-]?id|sheet[\\s_-]?id|spreadsheetId)[\\s:]+([A-Za-z0-9_-]+)|regex:([A-Za-z0-9_-]{20,})",
+      "OI-mcp-gdrive::gsheets_read.ranges": "regex:(?:range|ranges)[\\s:]+([A-Za-z0-9!:_-]+(?:,\\s*[A-Za-z0-9!:_-]+)*)",
+      "OI-mcp-gdrive::gsheets_read.sheetId": "regex:(?:sheet[\\s_-]?id)[\\s:]+(\\d+)"
+    },
+    "gsheets_update_cell": {
+      "OI-mcp-gdrive::gsheets_update_cell.fileId": "regex:(?:file[\\s_-]?id|spreadsheet[\\s_-]?id|fileId)[\\s:]+([A-Za-z0-9_-]+)|regex:([A-Za-z0-9_-]{20,})",
+      "OI-mcp-gdrive::gsheets_update_cell.range": "regex:(?:range|cell|at)[\\s:]+([A-Za-z0-9!:_-]+)",
+      "OI-mcp-gdrive::gsheets_update_cell.value": "regex:(?:value|to|set[\\s_-]?to|equals?)[\\s:]+(.+)|regex:(?:update|set|edit)[\\s:]+[A-Za-z0-9!:_-]+[\\s:]+(.+)"
+    }
+  },
+  "reminder_message": "Google Drive MCP server for searching files, reading files, and reading/updating Google Sheets. Requires OAuth authentication with CLIENT_ID, CLIENT_SECRET, and GDRIVE_CREDS_DIR environment variables. See OI.md for setup instructions."
+}
+
