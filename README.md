@@ -1,6 +1,6 @@
 # Google Drive server
 
-This MCP server integrates with Google Drive to allow listing, reading, and searching files, as well as the ability to read and write to Google Sheets.
+This MCP server integrates with Google Drive to allow listing, reading, searching, creating folders, and uploading files, as well as the ability to read and write to Google Sheets.
 
 This project includes code originally developed by Anthropic, PBC, licensed under the MIT License from [this repo](https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive).
 
