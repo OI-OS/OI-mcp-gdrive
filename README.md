@@ -41,6 +41,23 @@ This project includes code originally developed by Anthropic, PBC, licensed unde
     - `value` (string): New cell value.
   - **Output**: Confirms the updated value in the specified cell.
 
+- **gdrive_create_folder**
+  - **Description**: Create a new folder in Google Drive. Optionally specify a parent folder or shared drive.
+  - **Input**:
+    - `folderName` (string): Name of the folder to create.
+    - `parentId` (string, optional): Parent folder ID. If not provided, folder will be created in root or specified drive.
+    - `driveName` (string, optional): Shared drive name. If provided, folder will be created in that shared drive.
+  - **Output**: Returns the created folder ID and confirmation.
+
+- **gdrive_upload_file**
+  - **Description**: Upload a file to Google Drive. Optionally specify a parent folder or shared drive.
+  - **Input**:
+    - `filePath` (string): Local file path to upload.
+    - `fileName` (string, optional): Name for the file in Google Drive (defaults to original filename).
+    - `parentId` (string, optional): Parent folder ID. If not provided, file will be uploaded to root or specified drive.
+    - `driveName` (string, optional): Shared drive name. If provided, file will be uploaded to that shared drive.
+  - **Output**: Returns the uploaded file ID and view link.
+
 ### Resources
 
 The server provides access to Google Drive files:
